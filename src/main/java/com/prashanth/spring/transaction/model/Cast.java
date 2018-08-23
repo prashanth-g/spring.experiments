@@ -1,18 +1,18 @@
 package com.prashanth.spring.transaction.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class Movie {
+@Entity
+public class Cast {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    private String movieName;
-
-    private int year;
+    private String name;
 
     public Integer getId() {
         return id;
@@ -22,19 +22,11 @@ public class Movie {
         this.id = id;
     }
 
-    public String getMovieName() {
-        return movieName;
+    public String getName() {
+        return name;
     }
 
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
+    public void setName(String name) {
+        this.name = name;
     }
 }
