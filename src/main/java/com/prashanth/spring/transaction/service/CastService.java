@@ -18,7 +18,7 @@ class CastService {
     void createCast(Cast cast){
         try {
             castRepository.save(cast);
-            // throw new RuntimeException("Rollback this transaction!");
+            throw new RuntimeException("Rollback this transaction!");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
