@@ -1,9 +1,11 @@
 package com.prashanth.spring.transaction.service;
 
+import com.prashanth.spring.transaction.model.Cast;
 import com.prashanth.spring.transaction.repository.CastRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.prashanth.spring.transaction.model.Cast;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 class CastService {
@@ -12,7 +14,13 @@ class CastService {
     private
     CastRepository castRepository;
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     void createCast(Cast cast){
-        castRepository.save(cast);
+        try {
+            castRepository.save(cast);
+            // throw new RuntimeException("Rollback this transaction!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
