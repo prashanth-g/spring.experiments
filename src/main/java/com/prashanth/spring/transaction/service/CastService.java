@@ -14,10 +14,20 @@ class CastService {
     private
     CastRepository castRepository;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.NEVER)
     void createCast(Cast cast){
         try {
             castRepository.save(cast);
+            throw new RuntimeException("Rollback this transaction!");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    void updateCast(Cast cast) {
+        try {
+            castRepository.findById(cast.getId());
             throw new RuntimeException("Rollback this transaction!");
         } catch (Exception ex) {
             ex.printStackTrace();
